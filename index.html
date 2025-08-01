@@ -1,230 +1,519 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>NCEA Consultores</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
-    :root {
-      --azul-escuro: #002f5f;
-      --azul-claro: #4da6ff;
-      --dourado: #ffd700;
-      --amarelo-dourado: #ffcc00;
-      --branco: #ffffff;
+    /* Reset e estilos base */
+    *, *::before, *::after {
+      box-sizing: border-box;
     }
     body {
-      font-family: 'Open Sans', sans-serif;
+      margin: 0; padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f9fafb;
+      color: #333;
+      scroll-behavior: smooth;
     }
-    .banner {
-      background-color: var(--azul-escuro);
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Cores */
+    :root {
+      --azul-marinho: #003366;
+      --azul-claro: #0077cc;
+      --dourado: #f4c430;
+      --branco: #ffffff;
+    }
+
+    /* Navbar */
+    header {
+      background: var(--azul-marinho);
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      padding: 0.75rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       color: var(--branco);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     }
-    .section {
-      padding: 50px 20px;
+    .logo {
+      font-weight: 700;
+      font-size: 1.5rem;
+      letter-spacing: 2px;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+      margin: 0; padding: 0;
+    }
+    nav ul li a {
+      color: var(--branco);
+      font-weight: 600;
+      padding: 0.5rem 0;
+      transition: color 0.3s ease;
+    }
+    nav ul li a:hover {
+      color: var(--dourado);
+    }
+    /* Menu mobile */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+    .menu-toggle span {
+      height: 3px;
+      width: 25px;
+      background: var(--branco);
+      margin-bottom: 5px;
+      border-radius: 3px;
+    }
+
+    /* Banner (carrossel simples) */
+    .banner {
+      margin-top: 70px; /* header fixo */
+      position: relative;
+      height: 400px;
+      overflow: hidden;
+      border-radius: 0 0 20px 20px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+    .slides {
+      display: flex;
+      width: 300%;
+      height: 100%;
+      animation: slideAnimation 15s infinite;
+    }
+    .slide {
+      width: 100%;
+      flex-shrink: 0;
+      position: relative;
+      background-size: cover;
+      background-position: center;
+      color: var(--branco);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 2rem;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.8);
+    }
+    .slide h2 {
+      font-size: 2.8rem;
+      margin-bottom: 1rem;
+      font-weight: 900;
+      max-width: 600px;
+    }
+    .slide p {
+      font-size: 1.25rem;
+      max-width: 600px;
+    }
+
+    @keyframes slideAnimation {
+      0%, 33% { transform: translateX(0); }
+      36%, 66% { transform: translateX(-100%); }
+      69%, 99% { transform: translateX(-200%); }
+      100% { transform: translateX(0); }
+    }
+
+    /* Main content */
+    main {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1rem 4rem;
+    }
+    section {
+      margin-bottom: 4rem;
+    }
+    h2.section-title {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+      color: var(--azul-marinho);
+      border-bottom: 4px solid var(--dourado);
+      display: inline-block;
+      padding-bottom: 0.25rem;
+    }
+
+    /* Sobre */
+    .about-text {
+      max-width: 900px;
+      margin: 0 auto;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: #444;
+      text-align: center;
+    }
+
+    /* Cursos grid */
+    .courses-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+      gap: 1.8rem;
+    }
+    .course-card {
+      background: var(--branco);
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+      padding: 1.6rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: box-shadow 0.3s ease;
+    }
+    .course-card:hover {
+      box-shadow: 0 6px 20px rgb(0 0 0 / 0.2);
+    }
+    .course-card img {
+      max-width: 100%;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+    }
+    .course-title {
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: var(--azul-marinho);
+      margin-bottom: 0.5rem;
+    }
+    .course-desc {
+      flex-grow: 1;
+      font-size: 0.95rem;
+      color: #555;
+      margin-bottom: 1rem;
+    }
+    .course-info {
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+      color: #666;
+    }
+    .btn-primary {
+      background: var(--dourado);
+      border: none;
+      padding: 0.75rem 1rem;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+      color: var(--azul-marinho);
+      transition: background 0.3s ease;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .btn-primary:hover {
+      background: #d4af37;
+    }
+
+    /* Serviços */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+      gap: 2rem;
+    }
+    .service-card {
+      background: var(--branco);
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 2px 10px rgb(0 0 0 / 0.1);
+      text-align: center;
+      transition: box-shadow 0.3s ease;
+    }
+    .service-card:hover {
+      box-shadow: 0 6px 20px rgb(0 0 0 / 0.2);
+    }
+    .service-icon {
+      font-size: 3rem;
+      color: var(--azul-marinho);
+      margin-bottom: 1rem;
+    }
+    .service-title {
+      font-weight: 700;
+      font-size: 1.2rem;
+      margin-bottom: 0.7rem;
+      color: var(--azul-marinho);
+    }
+    .service-desc {
+      color: #555;
+      font-size: 1rem;
+    }
+
+    /* Parcerias */
+    .partners {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .partner-logo {
+      max-width: 160px;
+      max-height: 80px;
+      object-fit: contain;
+      filter: grayscale(100%);
+      opacity: 0.7;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    .partner-logo:hover {
+      filter: none;
+      opacity: 1;
+    }
+    .partner-desc {
+      max-width: 800px;
+      margin: 1rem auto 0;
+      text-align: center;
+      font-size: 1rem;
+      color: #444;
+    }
+
+    /* Contactos */
+    .contact-info {
+      max-width: 600px;
+      margin: 0 auto;
+      font-size: 1.1rem;
+      color: #444;
+      line-height: 1.6;
+      text-align: center;
+    }
+    .contact-info a {
+      color: var(--azul-marinho);
+      font-weight: 700;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--azul-marinho);
+      color: var(--branco);
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+      position: relative;
+      bottom: 0;
+      width: 100%;
+      margin-top: 3rem;
+    }
+
+    /* Responsivo */
+    @media (max-width: 768px) {
+      nav ul {
+        display: none;
+      }
+      .menu-toggle {
+        display: flex;
+      }
     }
   </style>
 </head>
 <body>
-  <!-- INÍCIO -->
-  <header class="banner text-center p-5">
-    <h1>NCEA Consultores</h1>
-    <p>Missão | Visão | Lema</p>
-    <div class="mt-4">
-      <a href="#cursos" class="btn btn-warning m-2">Cursos</a>
-      <a href="#servicos" class="btn btn-primary m-2">Serviços</a>
-      <a href="#contactos" class="btn btn-info m-2">Contactos</a>
-    </div>
-  </header>
 
-  <div id="carouselInicio" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-        <img src="img1.jpg" class="d-block w-100" alt="Formações">
-      </div>
-      <div class="carousel-item">
-        <img src="img2.jpg" class="d-block w-100" alt="Consultorias">
-      </div>
-      <div class="carousel-item">
-        <img src="img3.jpg" class="d-block w-100" alt="Equipa em acção">
-      </div>
+<header>
+  <div class="logo">NCEA Consultores</div>
+  <nav>
+    <ul id="nav-links">
+      <li><a href="#inicio">Início</a></li>
+      <li><a href="#sobre">Sobre</a></li>
+      <li><a href="#cursos">Cursos</a></li>
+      <li><a href="#servicos">Serviços</a></li>
+      <li><a href="#parcerias">Parcerias</a></li>
+      <li><a href="#contactos">Contactos</a></li>
+      <li><a href="#mais">Mais</a></li>
+    </ul>
+  </nav>
+  <div class="menu-toggle" id="menu-toggle" aria-label="Abrir menu" role="button" tabindex="0">
+    <span></span><span></span><span></span>
+  </div>
+</header>
+
+<section class="banner" id="inicio">
+  <div class="slides">
+    <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1400&q=80');">
+      <h2>Formação de Excelência para o Futuro</h2>
+      <p>Capacitamos jovens e profissionais com cursos certificados e práticos.</p>
+    </div>
+    <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1529070538774-1843cb3265df?auto=format&fit=crop&w=1400&q=80');">
+      <h2>Consultoria e Desenvolvimento Comunitário</h2>
+      <p>Transformamos comunidades com soluções sustentáveis e inovadoras.</p
+    </div>
+    <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?auto=format&fit=crop&w=1400&q=80');">
+      <h2>Impacto Social e Sucesso</h2>
+      <p>Juntos construímos um futuro melhor para as nossas comunidades.</p>
     </div>
   </div>
+</section>
 
-  <!-- DESTAQUES DO MÊS / TESTEMUNHOS -->
-  <section class="section bg-light">
-    <div class="container">
-      <h2>Ofertas do Mês</h2>
-      <p>Lista de ofertas e promoções activas.</p>
-      <h3>Testemunhos</h3>
-      <blockquote>“Excelente formação! Ajudou-me imenso no trabalho.” – Cliente A</blockquote>
-    </div>
-  </section>
-
+<main>
   <!-- SOBRE -->
-  <section id="sobre" class="section">
-    <div class="container">
-      <h2>Sobre Nós</h2>
-      <p>Histórico da empresa, missão, visão, valores, fundador e equipa, vídeo institucional, certificações e prémios.</p>
-    </div>
+  <section id="sobre">
+    <h2 class="section-title">Sobre Nós</h2>
+    <p class="about-text">
+      A NCEA Consultores dedica-se a capacitar indivíduos e instituições, promovendo inclusão, sustentabilidade e inovação. Com uma equipa experiente, oferecemos formação, consultoria e apoio ao desenvolvimento social e comunitário.
+    </p>
   </section>
 
   <!-- CURSOS -->
-  <section id="cursos" class="section bg-light">
-    <div class="container">
-      <h2>Cursos</h2>
-      <div class="row">
-        <!-- Exemplo de Curso -->
-        <div class="col-md-4">
-          <div class="card">
-            <img src="curso1.jpg" class="card-img-top" alt="Curso">
-            <div class="card-body">
-              <h5 class="card-title">Monitoria e Avaliação</h5>
-              <p class="card-text">Curso destinado a profissionais da educação e desenvolvimento.</p>
-              <ul>
-                <li>Carga horária: 40h</li>
-                <li>Formador: João Silva</li>
-                <li>Valor: 1.000,00 MZN</li>
-              </ul>
-              <a href="#formulario-inscricao" class="btn btn-success">Inscrever-se</a>
-            </div>
-          </div>
-        </div>
-        <!-- Repetir bloco para os outros 11 cursos -->
-      </div>
-    </div>
-  </section>
+  <section id="cursos">
+    <h2 class="section-title">Cursos</h2>
+    <div class="courses-grid">
+      <!-- Curso Exemplo -->
+      <article class="course-card">
+        <img src="https://images.unsplash.com/photo-1581091215367-dfc1f2991e5d?auto=format&fit=crop&w=600&q=80" alt="Monitoria e Avaliação" />
+        <h3 class="course-title">Monitoria e Avaliação</h3>
+        <p class="course-desc">Aprenda as melhores práticas para monitorizar e avaliar projectos sociais com eficácia.</p>
+        <p class="course-info"><strong>Duração:</strong> 40 horas | <strong>Público-alvo:</strong> Profissionais e estudantes</p>
+        <a href="#inscricao" class="btn-primary">Inscrever-se</a>
+      </article>
 
-  <!-- FORMULÁRIO DE INSCRIÇÃO -->
-  <section id="formulario-inscricao" class="section">
-    <div class="container">
-      <h2>Inscrição em Curso</h2>
-      <form>
-        <div class="mb-3">
-          <label class="form-label">Nome Completo</label>
-          <input type="text" class="form-control" required>
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Email</label>
-          <input type="email" class="form-control" required>
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Curso</label>
-          <select class="form-select">
-            <option>Monitoria e Avaliação</option>
-            <option>Informática Básica</option>
-            <option>Oratória e Expressão Pública</option>
-            <!-- outros cursos -->
-          </select>
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Contacto</label>
-          <input type="tel" class="form-control" required>
-        </div>
-        <button type="submit" class="btn btn-primary">Submeter Inscrição</button>
-      </form>
+      <article class="course-card">
+        <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=600&q=80" alt="Excel Avançado" />
+        <h3 class="course-title">Excel Avançado</h3>
+        <p class="course-desc">Domine funções avançadas, análise de dados e criação de dashboards profissionais.</p>
+        <p class="course-info"><strong>Duração:</strong> 30 horas | <strong>Público-alvo:</strong> Usuários intermediários a avançados</p>
+        <a href="#inscricao" class="btn-primary">Inscrever-se</a>
+      </article>
+
+      <!-- Adiciona mais cursos conforme necessário -->
     </div>
   </section>
 
   <!-- SERVIÇOS -->
-  <section id="servicos" class="section">
-    <div class="container">
-      <h2>Serviços</h2>
-      <div class="row">
-        <div class="col-md-4">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Consultoria</h5>
-              <p class="card-text">Apoio especializado em desenvolvimento institucional.</p>
-              <a href="#formulario-servico" class="btn btn-primary">Solicitar Serviço</a>
-            </div>
-          </div>
-        </div>
-        <!-- Outros serviços -->
+  <section id="servicos">
+    <h2 class="section-title">Serviços</h2>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">📊</div>
+        <h3 class="service-title">Consultoria</h3>
+        <p class="service-desc">Apoio especializado para planeamento e implementação de projectos sociais.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">👨‍🏫</div>
+        <h3 class="service-title">Formação Personalizada</h3>
+        <p class="service-desc">Cursos e workshops adaptados às necessidades das organizações e indivíduos.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🌱</div>
+        <h3 class="service-title">Desenvolvimento Comunitário</h3>
+        <p class="service-desc">Projectos de impacto social que promovem o crescimento sustentável das comunidades.</p>
       </div>
     </div>
   </section>
 
-  <!-- FORMULÁRIO DE SERVIÇO -->
-  <section id="formulario-servico" class="section bg-light">
-    <div class="container">
-      <h2>Solicitar Serviço</h2>
-      <form>
-        <div class="mb-3">
-          <label class="form-label">Nome do Serviço</label>
-          <input type="text" class="form-control" required>
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Detalhes</label>
-          <textarea class="form-control" rows="3" required></textarea>
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Prazo desejado</label>
-          <input type="date" class="form-control" required>
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Contacto</label>
-          <input type="tel" class="form-control" required>
-        </div>
-        <button type="submit" class="btn btn-success">Enviar</button>
-      </form>
-    </div>
-  </section>
-
   <!-- PARCERIAS -->
-  <section id="parcerias" class="section">
-    <div class="container">
-      <h2>Parcerias</h2>
-      <ul>
-        <li><strong>DESOC</strong> – Cooperação em desenvolvimento social.</li>
-        <li><strong>Rede Africana Juvenil</strong> – Projectos juvenis.</li>
-        <li><strong>Semear Esperança</strong> – Empoderamento comunitário.</li>
-      </ul>
-      <a href="#form-parceria" class="btn btn-warning">Quero ser parceiro</a>
+  <section id="parcerias">
+    <h2 class="section-title">Parcerias</h2>
+    <div class="partners">
+      <img src="https://via.placeholder.com/160x80?text=DESOC" alt="DESOC" class="partner-logo" />
+      <img src="https://via.placeholder.com/160x80?text=Rede+Africana+Juvenil" alt="Rede Africana Juvenil" class="partner-logo" />
+      <img src="https://via.placeholder.com/160x80?text=Semear+Esperança" alt="Associação Semear Esperança" class="partner-logo" />
     </div>
+    <p class="partner-desc">
+      Trabalhamos em conjunto com organizações locais e internacionais para promover desenvolvimento social e inclusão.
+    </p>
   </section>
 
   <!-- CONTACTOS -->
-  <section id="contactos" class="section bg-light">
-    <div class="container">
-      <h2>Contactos</h2>
-      <p>Email: ncea.consultores@gmail.com | ncea.consultores@outlook.com</p>
-      <p>Telemóvel: +258 84 958 78 11 | +258 83 460 71 25</p>
-      <form>
-        <div class="mb-3">
-          <label class="form-label">Nome</label>
-          <input type="text" class="form-control" required>
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Email</label>
-          <input type="email" class="form-control" required>
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Mensagem</label>
-          <textarea class="form-control" rows="3" required></textarea>
-        </div>
-        <button type="submit" class="btn btn-success">Enviar</button>
-      </form>
+  <section id="contactos">
+    <h2 class="section-title">Contactos</h2>
+    <div class="contact-info">
+      <p><strong>Email:</strong> <a href="mailto:ncea.consultores@gmail.com">ncea.consultores@gmail.com</a> | <a href="mailto:ncea.consultores@outlook.com">ncea.consultores@outlook.com</a></p>
+      <p><strong>Telemóveis:</strong> +258 84 958 78 11 | +258 83 460 71 25</p>
+      <p><strong>Endereço:</strong> Bairro 25 de Setembro, UC 2, Cidade de Moatize</p>
+      <p>
+        <strong>Redes Sociais:</strong>
+        <a href="#" aria-label="Facebook">👍</a> 
+        <a href="#" aria-label="WhatsApp">💬</a> 
+        <a href="#" aria-label="Instagram">📸</a> 
+        <a href="#" aria-label="LinkedIn">🔗</a>
+      </p>
     </div>
   </section>
 
   <!-- MAIS -->
-  <section id="mais" class="section">
-    <div class="container">
-      <h2>Mais</h2>
-      <ul>
-        <li>Realizações e Projectos Concluídos</li>
-        <li>Declarações de Clientes</li>
-        <li>Ofertas e Promoções do Mês</li>
-        <li>Notícias e Conteúdos Relevantes</li>
-      </ul>
-    </div>
+  <section id="mais">
+    <h2 class="section-title">Mais da NCEA</h2>
+    <ul>
+      <li><strong>Realizações:</strong> +500 jovens formados em várias áreas.</li>
+      <li><strong>Testemunhos:</strong> Depoimentos positivos de participantes e parceiros.</li>
+      <li><strong>Promoções:</strong> Descontos especiais para grupos comunitários e organizações.</li>
+      <li><strong>Notícias:</strong> Acompanhe as novidades e conteúdos exclusivos no nosso blog.</li>
+    </ul>
   </section>
 
-  <footer class="text-center p-4 bg-dark text-light">
-    <p>&copy; 2025 NCEA Consultores. Todos os direitos reservados.</p>
-  </footer>
+  <!-- FORMULÁRIO SIMPLES DE INSCRIÇÃO -->
+  <section id="inscricao" style="max-width:600px; margin:4rem auto; padding:1rem; background:#fff; border-radius:12px; box-shadow:0 2px 10px rgba(0,0,0,0.1);">
+    <h2 class="section-title" style="margin-bottom:1rem;">Inscreva-se num Curso</h2>
+    <form id="formInscricao">
+      <label for="nome">Nome Completo *</label><br />
+      <input type="text" id="nome" name="nome" required style="width:100%;padding:8px;margin-bottom:1rem; border:1px solid #ccc; border-radius:6px;" />
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+      <label for="email">Email *</label><br />
+      <input type="email" id="email" name="email" required style="width:100%;padding:8px;margin-bottom:1rem; border:1px solid #ccc; border-radius:6px;" />
+
+      <label for="telefone">Telefone / WhatsApp *</label><br />
+      <input type="tel" id="telefone" name="telefone" required style="width:100%;padding:8px;margin-bottom:1rem; border:1px solid #ccc; border-radius:6px;" />
+
+      <label for="curso">Curso *</label><br />
+      <select id="curso" name="curso" required style="width:100%;padding:8px;margin-bottom:1rem; border:1px solid #ccc; border-radius:6px;">
+        <option value="">-- Selecione um curso --</option>
+        <option value="Monitoria e Avaliação">Monitoria e Avaliação</option>
+        <option value="Excel Básico">Excel Básico</option>
+        <option value="Excel Intermediário">Excel Intermediário</option>
+        <option value="Excel Avançado">Excel Avançado</option>
+        <option value="Informática Básica">Informática Básica</option>
+        <option value="Informática Intermediária">Informática Intermediária</option>
+        <option value="Informática Avançada">Informática Avançada</option>
+        <option value="Oratória e Expressão Pública">Oratória e Expressão Pública</option>
+        <option value="Administração de Pessoas">Administração de Pessoas</option>
+        <option value="Filosofia Social">Filosofia Social</option>
+        <option value="Gestão de Projectos">Gestão de Projectos</option>
+        <option value="Desenvolvimento de Projectos Sociais">Desenvolvimento de Projectos Sociais</option>
+      </select>
+
+      <button type="submit" style="background: var(--dourado); border:none; padding:12px 20px; border-radius:8px; font-weight:700; cursor:pointer; color: var(--azul-marinho); width: 100%; font-size: 1.1rem;">Enviar Inscrição</button>
+    </form>
+    <p id="msgConfirm" style="margin-top:1rem; text-align:center; color:green; display:none;">Inscrição enviada com sucesso!</p>
+  </section>
+</main>
+
+<footer>
+  <p>&copy; 2025 NCEA Consultores. Todos os direitos reservados.</p>
+</footer>
+
+<script>
+  // Menu Mobile toggle
+  const menuToggle = document.getElementById('menu-toggle');
+  const navLinks = document.getElementById('nav-links');
+  menuToggle.addEventListener('click', () => {
+    if (navLinks.style.display === 'flex') {
+      navLinks.style.display = 'none';
+    } else {
+      navLinks.style.display = 'flex';
+      navLinks.style.flexDirection = 'column';
+      navLinks.style.backgroundColor = 'var(--azul-marinho)';
+      navLinks.style.position = 'absolute';
+      navLinks.style.top = '60px';
+      navLinks.style.right = '10px';
+      navLinks.style.padding = '10px';
+      navLinks.style.borderRadius = '8px';
+      navLinks.style.width = '200px';
+    }
+  });
+
+  // Formulário - apenas simulação de envio (podes integrar com backend)
+  const form = document.getElementById('formInscricao');
+  const msgConfirm = document.getElementById('msgConfirm');
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    // Aqui podes adicionar integração com EmailJS, Firebase, API, etc.
+    msgConfirm.style.display = 'block';
+    form.reset();
+  });
+</script>
+
 </body>
 </html>
