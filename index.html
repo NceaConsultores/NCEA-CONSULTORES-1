@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NCEA Consultores</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --azul-escuro: #002f5f;
+      --azul-claro: #4da6ff;
+      --dourado: #ffd700;
+      --amarelo-dourado: #ffcc00;
+      --branco: #ffffff;
+    }
+    body {
+      font-family: 'Open Sans', sans-serif;
+    }
+    .banner {
+      background-color: var(--azul-escuro);
+      color: var(--branco);
+    }
+    .section {
+      padding: 50px 20px;
+    }
+  </style>
+</head>
+<body>
+  <!-- INÍCIO -->
+  <header class="banner text-center p-5">
+    <h1>NCEA Consultores</h1>
+    <p>Missão | Visão | Lema</p>
+    <div class="mt-4">
+      <a href="#cursos" class="btn btn-warning m-2">Cursos</a>
+      <a href="#servicos" class="btn btn-primary m-2">Serviços</a>
+      <a href="#contactos" class="btn btn-info m-2">Contactos</a>
+    </div>
+  </header>
+
+  <div id="carouselInicio" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="img1.jpg" class="d-block w-100" alt="Formações">
+      </div>
+      <div class="carousel-item">
+        <img src="img2.jpg" class="d-block w-100" alt="Consultorias">
+      </div>
+      <div class="carousel-item">
+        <img src="img3.jpg" class="d-block w-100" alt="Equipa em acção">
+      </div>
+    </div>
+  </div>
+
+  <!-- DESTAQUES DO MÊS / TESTEMUNHOS -->
+  <section class="section bg-light">
+    <div class="container">
+      <h2>Ofertas do Mês</h2>
+      <p>Lista de ofertas e promoções activas.</p>
+      <h3>Testemunhos</h3>
+      <blockquote>“Excelente formação! Ajudou-me imenso no trabalho.” – Cliente A</blockquote>
+    </div>
+  </section>
+
+  <!-- SOBRE -->
+  <section id="sobre" class="section">
+    <div class="container">
+      <h2>Sobre Nós</h2>
+      <p>Histórico da empresa, missão, visão, valores, fundador e equipa, vídeo institucional, certificações e prémios.</p>
+    </div>
+  </section>
+
+  <!-- CURSOS -->
+  <section id="cursos" class="section bg-light">
+    <div class="container">
+      <h2>Cursos</h2>
+      <div class="row">
+        <!-- Exemplo de Curso -->
+        <div class="col-md-4">
+          <div class="card">
+            <img src="curso1.jpg" class="card-img-top" alt="Curso">
+            <div class="card-body">
+              <h5 class="card-title">Monitoria e Avaliação</h5>
+              <p class="card-text">Curso destinado a profissionais da educação e desenvolvimento.</p>
+              <ul>
+                <li>Carga horária: 40h</li>
+                <li>Formador: João Silva</li>
+                <li>Valor: 1.000,00 MZN</li>
+              </ul>
+              <a href="#formulario-inscricao" class="btn btn-success">Inscrever-se</a>
+            </div>
+          </div>
+        </div>
+        <!-- Repetir bloco para os outros 11 cursos -->
+      </div>
+    </div>
+  </section>
+
+  <!-- FORMULÁRIO DE INSCRIÇÃO -->
+  <section id="formulario-inscricao" class="section">
+    <div class="container">
+      <h2>Inscrição em Curso</h2>
+      <form>
+        <div class="mb-3">
+          <label class="form-label">Nome Completo</label>
+          <input type="text" class="form-control" required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Email</label>
+          <input type="email" class="form-control" required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Curso</label>
+          <select class="form-select">
+            <option>Monitoria e Avaliação</option>
+            <option>Informática Básica</option>
+            <option>Oratória e Expressão Pública</option>
+            <!-- outros cursos -->
+          </select>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Contacto</label>
+          <input type="tel" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Submeter Inscrição</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- SERVIÇOS -->
+  <section id="servicos" class="section">
+    <div class="container">
+      <h2>Serviços</h2>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Consultoria</h5>
+              <p class="card-text">Apoio especializado em desenvolvimento institucional.</p>
+              <a href="#formulario-servico" class="btn btn-primary">Solicitar Serviço</a>
+            </div>
+          </div>
+        </div>
+        <!-- Outros serviços -->
+      </div>
+    </div>
+  </section>
+
+  <!-- FORMULÁRIO DE SERVIÇO -->
+  <section id="formulario-servico" class="section bg-light">
+    <div class="container">
+      <h2>Solicitar Serviço</h2>
+      <form>
+        <div class="mb-3">
+          <label class="form-label">Nome do Serviço</label>
+          <input type="text" class="form-control" required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Detalhes</label>
+          <textarea class="form-control" rows="3" required></textarea>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Prazo desejado</label>
+          <input type="date" class="form-control" required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Contacto</label>
+          <input type="tel" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-success">Enviar</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- PARCERIAS -->
+  <section id="parcerias" class="section">
+    <div class="container">
+      <h2>Parcerias</h2>
+      <ul>
+        <li><strong>DESOC</strong> – Cooperação em desenvolvimento social.</li>
+        <li><strong>Rede Africana Juvenil</strong> – Projectos juvenis.</li>
+        <li><strong>Semear Esperança</strong> – Empoderamento comunitário.</li>
+      </ul>
+      <a href="#form-parceria" class="btn btn-warning">Quero ser parceiro</a>
+    </div>
+  </section>
+
+  <!-- CONTACTOS -->
+  <section id="contactos" class="section bg-light">
+    <div class="container">
+      <h2>Contactos</h2>
+      <p>Email: ncea.consultores@gmail.com | ncea.consultores@outlook.com</p>
+      <p>Telemóvel: +258 84 958 78 11 | +258 83 460 71 25</p>
+      <form>
+        <div class="mb-3">
+          <label class="form-label">Nome</label>
+          <input type="text" class="form-control" required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Email</label>
+          <input type="email" class="form-control" required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Mensagem</label>
+          <textarea class="form-control" rows="3" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-success">Enviar</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- MAIS -->
+  <section id="mais" class="section">
+    <div class="container">
+      <h2>Mais</h2>
+      <ul>
+        <li>Realizações e Projectos Concluídos</li>
+        <li>Declarações de Clientes</li>
+        <li>Ofertas e Promoções do Mês</li>
+        <li>Notícias e Conteúdos Relevantes</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer class="text-center p-4 bg-dark text-light">
+    <p>&copy; 2025 NCEA Consultores. Todos os direitos reservados.</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
